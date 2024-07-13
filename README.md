@@ -1,5 +1,4 @@
 # Chalkboard Demo Users Microservice
-# chalkboard_demo_users
 
 This repository contains the code for the chalkboard_demo_users project, which consists of two interconnected microservices: User Service and Todo Service. The User Service is responsible for managing user-related operations.
 
