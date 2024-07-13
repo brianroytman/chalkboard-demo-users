@@ -2,6 +2,7 @@ from pydantic import BaseModel, ConfigDict
 from datetime import datetime
 from typing import Optional
 
+
 class UserModel(BaseModel):
     id: int
     username: str
@@ -14,6 +15,7 @@ class UserModel(BaseModel):
     model_config = ConfigDict(
         from_attributes=True
     )
+
 
 class UserCreateModel(BaseModel):
     username: str
@@ -32,6 +34,7 @@ class UserCreateModel(BaseModel):
             }
         }
     )
+
 
 class UserUpdateModel(BaseModel):
     username: Optional[str]

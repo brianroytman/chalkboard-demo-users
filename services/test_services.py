@@ -4,6 +4,7 @@ from services.user_service import UserService
 from schemas import UserCreateModel
 from sqlalchemy.ext.asyncio import AsyncSession
 
+
 class TestUserServices(unittest.TestCase):
 
     @patch('services.user_service.UserService.get_user')
@@ -49,7 +50,7 @@ class TestUserServices(unittest.TestCase):
 
         # Assert that the user creation failed
         self.assertIsNone(result)
-    
+
     @patch('services.user_service.UserService.get_user')
     async def test_get_user(self, mock_get_user):
         # Mock the get_user function to return a user
@@ -139,6 +140,7 @@ class TestUserServices(unittest.TestCase):
 
         # Assert that the user does not exist
         self.assertFalse(result)
+
 
 if __name__ == '__main__':
     unittest.main()
