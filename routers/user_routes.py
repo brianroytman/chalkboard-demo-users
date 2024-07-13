@@ -17,7 +17,7 @@ async def create_user(user_data: UserCreateModel, session: AsyncSession = Depend
         await session.rollback()  # Rollback in case of an error
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
     
-@router.get("/users/{user_id}", response_model=UserModel)
+@router.get("/users/{user_id}", status_code=status.HTTP_200_OK, response_model=UserModel)
 async def get_user(user_id: int, session: AsyncSession = Depends(get_session)):
     try:
         user = await user_service.get_user(user_id, session)
@@ -25,7 +25,7 @@ async def get_user(user_id: int, session: AsyncSession = Depends(get_session)):
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
     
-@router.get("/users", response_model=list[UserModel])
+@router.get("/users", status_code=status.HTTP_200_OK, response_model=list[UserModel])
 async def get_users(session: AsyncSession = Depends(get_session)):
     try:
         users = await user_service.get_users(session)
@@ -33,7 +33,7 @@ async def get_users(session: AsyncSession = Depends(get_session)):
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
     
-@router.put("/users/{user_id}", response_model=UserModel)
+@router.put("/users/{user_id}", status_code=status.HTTP_200_OK, response_model=UserModel)
 async def update_user(user_id: int, user_data: UserUpdateModel, session: AsyncSession = Depends(get_session)):
     try:
         user = await user_service.update_user(user_id, user_data, session)
@@ -41,9 +41,10 @@ async def update_user(user_id: int, user_data: UserUpdateModel, session: AsyncSe
     except Exception as e:
         await session.rollback()  # Rollback in case of an error
 
-@router.delete("/users/{user_id}")
+@router.delete("/users/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_user(user_id: int, session: AsyncSession = Depends(get_session)):
     try:
         await user_service.delete_user(user_id, session)
+        return {"message": "User deleted successfully"}
     except Exception as e:
         await session.rollback()  # Rollback in case of an error
