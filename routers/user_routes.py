@@ -32,10 +32,12 @@ async def create_user(user_data: UserCreateModel, session: AsyncSession = Depend
 async def get_user(user_id: int, session: AsyncSession = Depends(get_session)):
     try:
         user = await user_service.get_user(user_id, session)
+        if user is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
         return user
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+
 
 
 @router.get("/users", status_code=status.HTTP_200_OK, response_model=list[UserModel])
@@ -44,8 +46,8 @@ async def get_users(session: AsyncSession = Depends(get_session)):
         users = await user_service.get_users(session)
         return users
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+
 
 
 @router.put("/users/{user_id}", status_code=status.HTTP_200_OK, response_model=UserModel)
