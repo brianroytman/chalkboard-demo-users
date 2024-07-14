@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException, status, Depends
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 from dependencies import get_session
 from schemas import UserModel, UserCreateModel, UserUpdateModel
@@ -14,6 +15,13 @@ async def create_user(user_data: UserCreateModel, session: AsyncSession = Depend
     try:
         user = await user_service.create_user(user_data, session)
         return user
+    except IntegrityError as e:
+        await session.rollback()  # Rollback in case of an error
+        if 'username' in str(e.orig):
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Username already exists")
+        if 'email' in str(e.orig):
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email already exists")
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Unique constraint violation")
     except Exception as e:
         await session.rollback()  # Rollback in case of an error
         raise HTTPException(
@@ -45,8 +53,17 @@ async def update_user(user_id: int, user_data: UserUpdateModel, session: AsyncSe
     try:
         user = await user_service.update_user(user_id, user_data, session)
         return user
+    except IntegrityError as e:
+        await session.rollback()  # Rollback in case of an error
+        if 'username' in str(e.orig):
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Username already exists")
+        if 'email' in str(e.orig):
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email already exists")
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Unique constraint violation")
     except Exception as e:
         await session.rollback()  # Rollback in case of an error
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
 
 
 @router.delete("/users/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
