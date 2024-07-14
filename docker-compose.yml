@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 8000:8000
+      - 8001:8001
     volumes:
       - .:/app
     env_file:
@@ -15,7 +15,7 @@ services:
   db:
     image: postgres:latest
     environment:
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: "postgresql+asyncpg://postgres:BroytPGDB123!!@db:5432/ChalkboardDemo"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
