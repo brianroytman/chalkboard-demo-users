@@ -1,5 +1,5 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from schemas import UserCreateModel
+from schemas import UserCreateModel, UserUpdateModel
 from models import User
 from repositories.user_repository import UserRepository
 
@@ -23,7 +23,7 @@ class UserService:
     async def get_users(self, session: AsyncSession) -> list[User]:
         return await self.user_repository.get_all(session)
 
-    async def update_user(self, user_id: int, user_data: UserCreateModel, session: AsyncSession) -> User:
+    async def update_user(self, user_id: int, user_data: UserUpdateModel, session: AsyncSession) -> User:
         return await self.user_repository.update(session, user_id, user_data.model_dump())
 
     async def delete_user(self, user_id: int, session: AsyncSession) -> None:
