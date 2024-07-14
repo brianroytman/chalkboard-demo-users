@@ -51,15 +51,15 @@ To set up and run this project, follow these instructions:
 
 3. Set up the database:
     - Run the following command to create the database:
-      ```sh
-      python create_db.py
-      ```
+    ```sh
+    py create_db.py
+    ```
 
 4. Start the User Service:
     - Run the following command to start the User Service:
-      ```sh
-      uvicorn main:app --reload --port 8001
-      ```
+    ```sh
+    uvicorn main:app --reload --port 8001
+    ```
 
 5. Access the User Service API documentation:
     - Open your web browser and go to `http://localhost:8001/docs` to access the Swagger UI documentation for the User Service API.
