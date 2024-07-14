@@ -15,7 +15,7 @@ class UserService:
             first_name=user_data.first_name,
             last_name=user_data.last_name
         )
-        return await self.user_repository.create(session, new_user)
+        return await self.user_repository.add(session, new_user)
 
     async def get_user(self, user_id: int, session: AsyncSession) -> User:
         return await self.user_repository.get_by_id(session, user_id)

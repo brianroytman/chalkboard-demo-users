@@ -119,6 +119,7 @@ curl -X 'DELETE' \
 To run the tests for this project, use the following commands:
 
 ```sh
-python -m unittest -v routers/test_routes.py
-python -m unittest -v services/test_services.py
-python -m unittest -v repositories/test_repository.py
+py -m unittest -v routers/test_routes.py
+py -m unittest -v services/test_services.py
+py -m unittest -v repositories/test_repository.py
+```

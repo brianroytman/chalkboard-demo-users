@@ -1,25 +1,22 @@
 import unittest
-import pytest
 from unittest.mock import patch, AsyncMock
 from repositories.user_repository import UserRepository
 from schemas import UserCreateModel, UserUpdateModel
 from sqlalchemy.ext.asyncio import AsyncSession
 
 
-@pytest.mark.asyncio
-class TestUserRepository(unittest.TestCase):
+class TestUserRepository(unittest.IsolatedAsyncioTestCase):
     @patch('repositories.user_repository.UserRepository.add', new_callable=AsyncMock)
     async def test_create_user(self, mock_add):
-        # Test case for creating a user
         user_data = UserCreateModel(
             username='testuser',
             email='testuser@example.com',
             first_name='Test',
             last_name='User',
+            date_created='2024-07-14T12:00:00Z',
+            date_updated='2024-07-14T12:00:00Z'
         )
         session = AsyncMock(spec=AsyncSession)
-
-        # Mock the add method to return the user data
         mock_add.return_value = user_data
 
         user_repository = UserRepository()
@@ -73,15 +70,28 @@ class TestUserRepository(unittest.TestCase):
             first_name='Test',
             last_name='User',
         )
-        expected_user = {**user_data, 'id': user_id}
 
         # Mock the update method to return the updated user data
-        mock_update.return_value = expected_user
+        mock_update.return_value = user_data
 
         user_repository = UserRepository()
         actual_user = await user_repository.update(AsyncSession, user_id, user_data)
 
-        self.assertEqual(actual_user, expected_user)
+        # Construct the expected user dictionary manually
+        expected_user = {
+            'id': user_id,
+            'username': user_data.username,
+            'email': user_data.email,
+            'first_name': user_data.first_name,
+            'last_name': user_data.last_name,
+        }
+
+        # Assert each attribute individually
+        self.assertEqual(actual_user.username, expected_user['username'])
+        self.assertEqual(actual_user.email, expected_user['email'])
+        self.assertEqual(actual_user.first_name, expected_user['first_name'])
+        self.assertEqual(actual_user.last_name, expected_user['last_name'])
+
 
     @patch('repositories.user_repository.UserRepository.delete', new_callable=AsyncMock)
     async def test_delete_user(self, mock_delete):

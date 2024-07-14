@@ -7,7 +7,7 @@ from fastapi import HTTPException, status
 
 
 class UserRepository:
-    async def create(self, session: AsyncSession, user: User) -> User:
+    async def add(self, session: AsyncSession, user: User) -> User:
         session.add(user)
         await session.commit()
         return user
