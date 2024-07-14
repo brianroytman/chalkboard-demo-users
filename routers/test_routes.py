@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import patch, MagicMock
 from fastapi.testclient import TestClient
 from datetime import datetime, timezone
-from main import app  # Import your FastAPI app
+from main import app
 from schemas import UserCreateModel, UserModel, UserUpdateModel
 from services.user_service import UserService
 

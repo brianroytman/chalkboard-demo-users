@@ -12,6 +12,33 @@ The following technologies were used in this project:
 - Docker
 - OpenAPI/Swagger
 
+## Considerations
+
+### Embraced Async Operations
+- **Improved Performance:** Non-blocking operations allow handling more concurrent requests efficiently.
+- **Scalability:** Utilizes server resources better by overlapping tasks and improving CPU and I/O utilization.
+- **Responsive Applications:** Ensures applications remain responsive to requests, providing faster responses to clients.
+
+### Embraced Repository Pattern
+
+1. **Repository Pattern Overview**
+   - Abstracts data access logic, separating it from the application's business logic.
+   - Provides centralized access to data, hiding details of data storage, retrieval, and manipulation.
+
+2. **Key Components**
+   - **Data Access Abstraction:** Encapsulates logic for CRUD operations, shields the business logic from database specifics.
+   - **Separation of Concerns:** Promotes modular and maintainable code by isolating changes in data storage technology or schema.
+
+3. **Implementation Alignment**
+   - **Router (Controller) Layer:** Handles HTTP requests, validates inputs, delegates processing to the service layer.
+   - **Service (Business Logic) Layer:** Implements application-specific rules, coordinates with repositories for data operations.
+   - **Repository (Data Access) Layer:** Manages database interactions, offers a unified interface for data access operations.
+
+4. **Advantages**
+   - **Testability:** Enables independent testing of business logic using mock repositories.
+   - **Flexibility:** Minimizes impact of database technology or schema changes by confining them to the repository layer.
+   - **Centralized Data Access:** Promotes code reuse, ensures consistent data access patterns across the application.
+
 ## Directory Structure
 
 The directory structure of this project is as follows:
