@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException, status, Depends
+from fastapi.responses import Response
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 from dependencies import get_session
@@ -72,6 +73,8 @@ async def update_user(user_id: int, user_data: UserUpdateModel, session: AsyncSe
 async def delete_user(user_id: int, session: AsyncSession = Depends(get_session)):
     try:
         await user_service.delete_user(user_id, session)
-        return {"message": "User deleted successfully"}
+        return Response(status_code=status.HTTP_204_NO_CONTENT)
     except Exception as e:
         await session.rollback()  # Rollback in case of an error
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+
