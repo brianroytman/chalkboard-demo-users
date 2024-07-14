@@ -27,6 +27,14 @@ The directory structure of this project is as follows:
 - `models.py`: This file defines the SQLAlchemy model for User.
 - `schemas.py`: This file defines the Pydantic schemas for input/output validation.
 
+## API Endpoints
+
+- Create a User: POST /users/
+- Read Users: GET /users/
+- Read a User by ID: GET /users/{user_id}/
+- Update a User: PUT /users/{user_id}/
+- Delete a User: DELETE /users/{user_id}/
+
 ## Setup Instructions
 
 To set up and run this project, follow these instructions:
@@ -55,6 +63,56 @@ To set up and run this project, follow these instructions:
 
 5. Access the User Service API documentation:
     - Open your web browser and go to `http://localhost:8001/docs` to access the Swagger UI documentation for the User Service API.
+
+## cURL Request Examples
+- GET /users/
+```sh
+curl -X 'GET' \
+  'http://127.0.0.1:8001/users' \
+  -H 'accept: application/json'
+```
+
+- POST /users/
+```sh
+curl -X 'POST' \
+  'http://127.0.0.1:8001/users' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "email": "testing@gmail.com",
+  "first_name": "Test",
+  "last_name": "Me",
+  "username": "TestMeAgain"
+}'
+```
+
+-GET /users/{user_id}
+```sh
+curl -X 'GET' \
+  'http://127.0.0.1:8001/users/1' \
+  -H 'accept: application/json'
+```
+
+- PUT /users/{user_id}/
+```sh
+curl -X 'PUT' \
+  'http://127.0.0.1:8001/users/1' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "email": "johnnydoe@gmail.com",
+  "first_name": "Johnny",
+  "last_name": "Doe",
+  "username": "jd"
+}'
+```
+
+- DELETE /users/{user_id}/
+```sh
+curl -X 'DELETE' \
+  'http://127.0.0.1:8001/users/6' \
+  -H 'accept: */*'
+```
 
 ## Testing Descriptions
 
