@@ -56,5 +56,33 @@ To set up and run this project, follow these instructions:
 5. Access the User Service API documentation:
     - Open your web browser and go to `http://localhost:8001/docs` to access the Swagger UI documentation for the User Service API.
 
-That's it! You have successfully set up and run the chalkboard_demo_users project. You can now start using the User Service API.
+## Testing Descriptions
 
+This project includes unit tests at various levels to ensure the correctness of the application.
+
+### Router Level Tests
+
+- **Purpose:** These tests focus on ensuring the API endpoints behave as expected.
+- **Scope:** They test the routing logic, including request validation, response status codes, and response data.
+- **Example:** Testing the `/users` endpoint to create a new user and verify that it returns a 201 status code with the correct user data.
+
+### Service Level Tests
+
+- **Purpose:** These tests validate the business logic implemented in the service layer.
+- **Scope:** They ensure that the service methods correctly process data and handle different scenarios, such as successful operations and exceptions.
+- **Example:** Testing the `create_user` service method to ensure it correctly creates a user and raises appropriate exceptions for invalid data.
+
+### Repository Level Tests
+
+- **Purpose:** These tests focus on the database interactions and ensure the repository methods work as intended.
+- **Scope:** They verify that the database operations, such as CRUD operations, are correctly implemented and handle edge cases.
+- **Example:** Testing the `add_user` repository method to ensure it correctly inserts a new user record into the database and retrieves it.
+
+## Running Tests
+
+To run the tests for this project, use the following commands:
+
+```sh
+python -m unittest routers/test_routes.py
+python -m unittest services/test_services.py
+python -m unittest repositories/test_repository.py
