@@ -114,28 +114,6 @@ curl -X 'DELETE' \
   -H 'accept: */*'
 ```
 
-## Testing Descriptions
-
-This project includes unit tests at various levels to ensure the correctness of the application.
-
-### Router Level Tests
-
-- **Purpose:** These tests focus on ensuring the API endpoints behave as expected.
-- **Scope:** They test the routing logic, including request validation, response status codes, and response data.
-- **Example:** Testing the `/users` endpoint to create a new user and verify that it returns a 201 status code with the correct user data.
-
-### Service Level Tests
-
-- **Purpose:** These tests validate the business logic implemented in the service layer.
-- **Scope:** They ensure that the service methods correctly process data and handle different scenarios, such as successful operations and exceptions.
-- **Example:** Testing the `create_user` service method to ensure it correctly creates a user and raises appropriate exceptions for invalid data.
-
-### Repository Level Tests
-
-- **Purpose:** These tests focus on the database interactions and ensure the repository methods work as intended.
-- **Scope:** They verify that the database operations, such as CRUD operations, are correctly implemented and handle edge cases.
-- **Example:** Testing the `add_user` repository method to ensure it correctly inserts a new user record into the database and retrieves it.
-
 ## Running Tests
 
 To run the tests for this project, use the following commands:
