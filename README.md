@@ -2,6 +2,19 @@
 
 This repository contains the code for the chalkboard_demo_users project, which consists of two interconnected microservices: User Service and Todo Service. The User Service is responsible for managing user-related operations.
 
+## Table of Contents
+
+- [Technologies Used](#technologies-used)
+- [Considerations](#considerations)
+  - [Embraced Async Operations](#embraced-async-operations)
+  - [Embraced Repository Pattern](#embraced-repository-pattern)
+- [Directory Structure](#directory-structure)
+  - [User Service](#user-service)
+- [API Endpoints](#api-endpoints)
+- [Setup Instructions](#setup-instructions)
+- [cURL Request Examples](#curl-request-examples)
+- [Running Tests](#running-tests)
+
 ## Technologies Used
 
 The following technologies were used in this project:
