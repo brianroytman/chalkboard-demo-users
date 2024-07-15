@@ -12,6 +12,8 @@ This repository contains the code for the chalkboard_demo_users project, which c
   - [Users Service](#users-service)
 - [API Endpoints](#api-endpoints)
 - [Setup Instructions](#setup-instructions)
+  -[Run Local](#run-local)
+  -[Run via Docker](#run-via-docker)
 - [cURL Request Examples](#curl-request-examples)
 - [Running Tests](#running-tests)
 
@@ -47,7 +49,7 @@ The following technologies were used in this project:
    - **Service (Business Logic) Layer:** Implements application-specific rules, coordinates with repositories for data operations.
    - **Repository (Data Access) Layer:** Manages database interactions, offers a unified interface for data access operations.
 
-- Repository Pattern: Create User Example
+  - Repository Pattern: Create User Example
 ```mermaid
 sequenceDiagram
 participant ui as ui
