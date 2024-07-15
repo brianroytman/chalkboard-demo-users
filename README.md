@@ -47,6 +47,7 @@ The following technologies were used in this project:
    - **Service (Business Logic) Layer:** Implements application-specific rules, coordinates with repositories for data operations.
    - **Repository (Data Access) Layer:** Manages database interactions, offers a unified interface for data access operations.
 
+- Repository Pattern: Create User Example
 ```mermaid
 sequenceDiagram
 participant ui as ui
@@ -54,10 +55,10 @@ participant ur as users router
 participant us as users service
 participant urp as users repository
 participant ud as users table
-ui ->> ur: POST /users 
-ur ->> us: Create User route 
-us ->> urp: Create User service 
-urp ->> ud: Add:Write User record to DB
+ui ->> ur: POST /users routes.create_user
+ur ->> us: services.create_user
+us ->> urp: repositories.add user
+urp ->> ud: Write User record to DB
 ```
 
 4. **Advantages**
@@ -130,10 +131,10 @@ To set up and run this project locally, follow these instructions:
 To set up and run this project with Docker, follow these instructions:
 
 1. Clone the repository and navigate to the root directory of the project:
-    ```sh
-    git clone https://github.com/brianroytman/chalkboard-demo-users.git
-    cd chalkboard-demo-users
-    ```
+```sh
+git clone https://github.com/brianroytman/chalkboard-demo-users.git
+cd chalkboard-demo-users
+```
 
 2. Make sure Docker is installed on your machine:
 
