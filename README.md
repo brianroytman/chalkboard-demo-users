@@ -1,15 +1,15 @@
 # Chalkboard Demo Users Microservice
 
-This repository contains the code for the chalkboard_demo_users project, which consists of two interconnected microservices: User Service and Todo Service. The User Service is responsible for managing user-related operations.
+This repository contains the code for the chalkboard_demo_users project, which consists of two interconnected microservices: Users Service and Todos Service. The Users Service is responsible for managing user-related operations.
 
 ## Table of Contents
 
 - [Technologies Used](#technologies-used)
-- [Considerations](#considerations)
-  - [Embraced Async Operations](#embraced-async-operations)
-  - [Embraced Repository Pattern](#embraced-repository-pattern)
+- [Project Considerations](#project-considerations)
+  - [Embrace Async Operations](#embrace-async-operations)
+  - [Embrace Repository Pattern](#embrace-repository-pattern)
 - [Directory Structure](#directory-structure)
-  - [User Service](#user-service)
+  - [Users Service](#users-service)
 - [API Endpoints](#api-endpoints)
 - [Setup Instructions](#setup-instructions)
 - [cURL Request Examples](#curl-request-examples)
@@ -25,14 +25,14 @@ The following technologies were used in this project:
 - Docker
 - OpenAPI/Swagger
 
-## Considerations
+## Project Considerations
 
-### Embraced Async Operations
+### Async Operations
 - **Improved Performance:** Non-blocking operations allow handling more concurrent requests efficiently.
 - **Scalability:** Utilizes server resources better by overlapping tasks and improving CPU and I/O utilization.
 - **Responsive Applications:** Ensures applications remain responsive to requests, providing faster responses to clients.
 
-### Embraced Repository Pattern
+### Repository Pattern
 
 1. **Repository Pattern Overview**
    - Abstracts data access logic, separating it from the application's business logic.
@@ -47,6 +47,19 @@ The following technologies were used in this project:
    - **Service (Business Logic) Layer:** Implements application-specific rules, coordinates with repositories for data operations.
    - **Repository (Data Access) Layer:** Manages database interactions, offers a unified interface for data access operations.
 
+```mermaid
+sequenceDiagram
+participant ui as ui
+participant ur as users router
+participant us as users service
+participant urp as users repository
+participant ud as users table
+ui ->> ur: POST /users 
+ur ->> us: Create User route 
+us ->> urp: Create User service 
+urp ->> ud: Add:Write User record to DB
+```
+
 4. **Advantages**
    - **Testability:** Enables independent testing of business logic using mock repositories.
    - **Flexibility:** Minimizes impact of database technology or schema changes by confining them to the repository layer.
@@ -56,7 +69,7 @@ The following technologies were used in this project:
 
 The directory structure of this project is as follows:
 
-### User Service
+### Users Service
 
 - `repositories/user_repository.py`: This file implements database operations using SQLAlchemy.
 - `routers/user_routes.py`: This file defines API routes and endpoints using FastAPI. It depends on services for handling requests.
@@ -77,11 +90,14 @@ The directory structure of this project is as follows:
 
 ## Setup Instructions
 
-To set up and run this project, follow these instructions:
+### Run Local
 
-1. Clone the repository:
+To set up and run this project locally, follow these instructions:
+
+1. Clone the repository and navigate to the root directory of the project:
     ```sh
-    git clone <repository_url>
+    git clone https://github.com/brianroytman/chalkboard-demo-users.git
+    cd chalkboard-demo-users
     ```
 
 2. Install the required dependencies:
@@ -95,14 +111,44 @@ To set up and run this project, follow these instructions:
     py create_db.py
     ```
 
-4. Start the User Service:
+4. Start the Users Service:
     - Run the following command to start the User Service:
     ```sh
     uvicorn main:app --reload --port 8001
     ```
 
 5. Access the User Service API documentation:
-    - Open your web browser and go to `http://localhost:8001/docs` to access the Swagger UI documentation for the User Service API.
+    - Open your web browser and go to `http://localhost:8001` to access the Swagger UI documentation and endpoints for the User Service API.
+
+
+6. Interact with Users service endpoints via web browser or Postman
+    - Sample cURL requests provided below
+    [cURL Request Examples](#curl-request-examples)
+
+### Run via Docker
+
+To set up and run this project with Docker, follow these instructions:
+
+1. Clone the repository and navigate to the root directory of the project:
+    ```sh
+    git clone https://github.com/brianroytman/chalkboard-demo-users.git
+    cd chalkboard-demo-users
+    ```
+
+2. Make sure Docker is installed on your machine:
+
+3. Run Docker Compose:
+```sh
+docker-compose build
+docker-compose up
+```
+
+4. Access the Users service in your web browser:
+```sh
+http://localhost:8001
+```
+
+5. Interact with Users service endpoints via web browser
 
 ## cURL Request Examples
 - GET /users/
