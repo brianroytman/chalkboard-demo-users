@@ -52,15 +52,20 @@ The following technologies were used in this project:
   - Repository Pattern: Create User Example
 ```mermaid
 sequenceDiagram
-participant ui as ui
-participant ur as users router
-participant us as users service
-participant urp as users repository
-participant ud as users table
+participant ui as UI
+participant ur as Users Router
+participant us as Users Service
+participant urp as Users Repository
+participant ud as Users Table
+
 ui ->> ur: POST /users routes.create_user
 ur ->> us: services.create_user
 us ->> urp: repositories.add user
 urp ->> ud: Write User record to DB
+ud -->> urp: Return operation success
+urp -->> us: Return repository response
+us -->> ur: Return service response
+ur -->> ui: Return HTTP response
 ```
 
 4. **Advantages**
