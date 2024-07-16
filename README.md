@@ -6,8 +6,8 @@ This repository contains the code for the chalkboard_demo_users project, which c
 
 - [Technologies Used](#technologies-used)
 - [Project Considerations](#project-considerations)
-  - [Embrace Async Operations](#embrace-async-operations)
-  - [Embrace Repository Pattern](#embrace-repository-pattern)
+  - [Async Operations](#async-operations)
+  - [Repository Pattern](#repository-pattern)
 - [Directory Structure](#directory-structure)
   - [Users Service](#users-service)
 - [API Endpoints](#api-endpoints)
