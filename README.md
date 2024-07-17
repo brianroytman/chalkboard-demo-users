@@ -8,12 +8,12 @@ This repository contains the code for the chalkboard_demo_users project, which c
 - [Project Considerations](#project-considerations)
   - [Async Operations](#async-operations)
   - [Repository Pattern](#repository-pattern)
-- [Directory Structure](#directory-structure)
+- [Project Structure](#project-structure)
   - [Users Service](#users-service)
 - [API Endpoints](#api-endpoints)
 - [Setup Instructions](#setup-instructions)
-  -[Run Local](#run-local)
-  -[Run via Docker](#run-via-docker)
+  - [Run Local](#run-local)
+  - [Run via Docker](#run-via-docker)
 - [cURL Request Examples](#curl-request-examples)
 - [Running Tests](#running-tests)
 
@@ -73,11 +73,37 @@ ur -->> ui: Return HTTP response
    - **Flexibility:** Minimizes impact of database technology or schema changes by confining them to the repository layer.
    - **Centralized Data Access:** Promotes code reuse, ensures consistent data access patterns across the application.
 
-## Directory Structure
+## Project Structure
 
 The directory structure of this project is as follows:
 
 ### Users Service
+```
+chalkboard_demo_users/
+├── Dockerfile
+├── requirements.txt
+├── docker-compose.yml
+├── main.py
+├── create_db.py
+├── database.py
+├── dependencies.py
+├── models.py
+├── schemas.py
+├── services/
+│ ├── user_service.py
+│ └── test_services.py
+├── repositories/
+│ ├── user_repository.py
+│ └── test_repository.py
+├── routers/
+│ ├── user_routes.py
+│ └── test_routes.py
+├── handlers/
+│ ├── command_handler.py
+│ └── query_handler.py
+├── commands.py
+├── queries.py
+```
 
 - `repositories/user_repository.py`: This file implements database operations using SQLAlchemy.
 - `routers/user_routes.py`: This file defines API routes and endpoints using FastAPI. It depends on services for handling requests.
@@ -90,11 +116,13 @@ The directory structure of this project is as follows:
 
 ## API Endpoints
 
-- Create a User: POST /users/
-- Read Users: GET /users/
-- Read a User by ID: GET /users/{user_id}/
-- Update a User: PUT /users/{user_id}/
-- Delete a User: DELETE /users/{user_id}/
+| Action               | HTTP Method | Endpoint                          |
+|----------------------|-------------|-----------------------------------|
+| Create a User        | POST        | /users                            |
+| Read All Users           | GET         | /users                            |
+| Read a User by ID    | GET         | /users/{user_id}                  |
+| Update a User        | PUT         | /users/{user_id}                  |
+| Delete a User        | DELETE      | /users/{user_id}                  |
 
 ## Setup Instructions
 
