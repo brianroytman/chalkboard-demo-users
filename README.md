@@ -208,7 +208,7 @@ curl -X 'POST' \
 }'
 ```
 
--GET /users/{user_id}
+- GET /users/{user_id}
 ```sh
 curl -X 'GET' \
   'http://127.0.0.1:8001/users/1' \
